@@ -97,4 +97,22 @@ double dist_pts_line(PT p, LN l) {
 	return abs(cross_prod(a,b)) / abs(l.fi-l.se);
 }
 
-// rest code
+vector<PT> intersec_line_line(LN a, LN b) {
+	vector<PT> res;
+	if(abs(cross_prod(a.fi-a.se, b.fi-b.se)) < EPS)
+		return res;
+	if(abs(cross_prod(b.fi-a.fi, b.se-a.fi)) < EPS)
+		swap(a.fi, a.se);
+
+	VC va, vb, vc;
+	double s, t;
+	va = b.fi-a.fi;
+	vb = b.se-a.fi;
+	vc = a.se-a.fi;
+	s = cross_prod(va,vc) / cross_prod(va,vb);
+	t = cross_prod(vc,vb) / cross_prod(va,vb);
+	res.push_back(a.fi + (t * va + s * vb) / (s+t));
+	return res;
+}
+
+// test code
