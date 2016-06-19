@@ -28,7 +28,6 @@
 |```VC get_vc_normal(VC a)```|ベクトルaの単位法線ベクトル取得|AOJ1132|
 |```vector<LN> get_comm_tan(CIR c0, CIR c1)```|共通接線(common tangent) 同半径の円が重なると動かないので注意(無限個接線がある)|AOJ2201|
 |```double dist_pts_line(PT p, LN l)```|点pと直線lの距離|AOJ2201|
-|```double intersec_line_line(LN a, LN b)```|直線と直線の交点|TODO|
-|```double intersec_seg_seg(SG a, SG b)```|線分と線分の交点|TODO|
-|```double intersec_circle_circle(CIR a, CIR b)```|円と円の交点|TODO|
-
+|```vector<PT> intersec_line_line(LN a, LN b)```|直線と直線の交点|AOJ1183|
+|```vector<PT> intersec_seg_seg(SG a, SG b)```|線分と線分の交点|AOJ1183|
+|```vector<PT> intersec_circle_circle(CIR a, CIR b)```|円と円の交点|AOJ1183|
