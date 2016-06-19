@@ -97,4 +97,62 @@ double dist_pts_line(PT p, LN l) {
 	return abs(cross_prod(a,b)) / abs(l.fi-l.se);
 }
 
-// rest code
+vector<PT> intersec_line_line(LN a, LN b) {
+	vector<PT> res;
+	if(abs(cross_prod(a.fi-a.se, b.fi-b.se)) < EPS)
+		return res;
+	if(abs(cross_prod(b.fi-a.fi, b.se-a.fi)) < EPS)
+		swap(a.fi, a.se);
+
+	VC va, vb, vc;
+	double s, t;
+	va = b.fi-a.fi;
+	vb = b.se-a.fi;
+	vc = a.se-a.fi;
+	s = cross_prod(va,vc) / cross_prod(va,vb);
+	t = cross_prod(vc,vb) / cross_prod(va,vb);
+	res.push_back(a.fi + (t * va + s * vb) / (s+t));
+	return res;
+}
+
+bool on_seg(PT p, SG a) {
+	VC b, c;
+	b = a.fi - p;
+	c = a.se - p;
+	return dot_prod(b,c) < EPS && abs(cross_prod(b,c)) < EPS;
+}
+
+vector<PT> intersec_seg_seg(SG a, SG b) {
+	vector<PT> tmp, res;
+	tmp = intersec_line_line(a,b);
+	for(int i = 0; i < tmp.size(); i++) {
+		if(on_seg(tmp[i],a) && on_seg(tmp[i],b))
+			res.push_back(tmp[i]);
+	}
+	return res;
+}
+
+vector<PT> intersec_circle_circle(CIR a, CIR b) {
+	vector<PT> res;
+	double d = abs(a.fi-b.fi);
+	if(abs(a.se+b.se-d) < EPS || abs(abs(a.se-b.se)-d) < EPS) {
+		res.push_back(a.fi + polar(a.se, arg(b.fi-a.fi)));
+		return res;
+	}
+	if(a.se+b.se < d || d < abs(a.se-b.se))
+		return res;
+	double theta;
+	double aa, bb, cc;
+	aa = b.se;
+	bb = a.se;
+	cc = d;
+	// 余弦定理
+	theta = acos((bb*bb + cc*cc - aa*aa)/ (2.0*bb*cc));
+	for(int i = 0; i < 2; i++) {
+		res.push_back(a.fi + polar(a.se, theta + arg(b.fi-a.fi)));
+		theta *= -1;
+	}
+	return res;
+}
+
+// test code
