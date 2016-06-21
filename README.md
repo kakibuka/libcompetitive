@@ -31,3 +31,19 @@
 |```vector<PT> intersec_line_line(LN a, LN b)```|直線と直線の交点|AOJ1183|
 |```vector<PT> intersec_seg_seg(SG a, SG b)```|線分と線分の交点|AOJ1183|
 |```vector<PT> intersec_circle_circle(CIR a, CIR b)```|円と円の交点|AOJ1183|
+
+
+## クエリ処理系データ構造
+### 実装したデータ構造
+
+|データ構造|内容|verify|
+|:--:|:--:|:--:|
+|```UpdateDelayedRMQ```|更新遅延付きセグ木によるRMQ実装|CF52C|
+
+### データ構造使用法
+#### ```UpdateDelayedRMQ```
+|メンバ関数|内容|
+|:--:|:--:|
+|```UpdateDelayedRMQ(int sz, T init_dat, T sentinel)```|コンストラクタ。szにセグ木が持つべき区間の大きさを、init_datに初期化用の値を、sentinelに考えられる最大値を入れる|
+|```T ref_dat(k)```|外から呼ぶ必要なし。ノードを参照する際に必要な更新を行い、ノードが持つ値を返す|
+|```T query(int a, int b, int k, int l, int r, bool update, T info)```|半開区間[a,b)の最小値を返す。k,l,rにはノード番号kが[l,r)の区間の情報を持つような値を引数として与える。アップデートクエリではupdate=true,info=(加算する値)を設定し、最小値クエリではupdate=false,info=0を設定する。|
