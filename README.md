@@ -49,4 +49,7 @@
 |:--:|:--:|
 |```UpdateDelayedRMQ(int sz, T init_dat, T sentinel)```|コンストラクタ。szにセグ木が持つべき区間の大きさを、init_datに初期化用の値を、sentinelに考えられる最大値を入れる|
 |```T ref_dat(k)```|外から呼ぶ必要なし。ノードを参照する際に必要な更新を行い、ノードが持つ値を返す|
-|```T query(int a, int b, int k, int l, int r, bool update, T info)```|半開区間[a,b)の最小値を返す。k,l,rにはノード番号kが[l,r)の区間の情報を持つような値を引数として与える。アップデートクエリではupdate=true,info=(加算する値)を設定し、最小値クエリではupdate=false,info=0を設定する。|
+|```T inner_query(int a, int b, int k, int l, int r, bool update, T info)```|半開区間[a,b)の最小値を返す。 k,l,rにはノード番号kが[l,r)の区間の情報を持つような値を引数として与える。 アップデートクエリではupdate=true,info=(加算する値)を設定し、 最小値クエリではupdate=false,info=0を設定する。|
+|```T query(int a, int b)```|半開区間[a,b)の最小値クエリ。 inner_queryを適切な形で呼び出す|
+|```T update(int a, int b, T v)```|半開区間[a,b)への加算クエリ。 inner_queryを適切な形で呼び出す|
+
