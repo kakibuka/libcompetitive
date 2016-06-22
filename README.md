@@ -31,6 +31,9 @@
 |```vector<PT> intersec_line_line(LN a, LN b)```|直線と直線の交点|AOJ1183|
 |```vector<PT> intersec_seg_seg(SG a, SG b)```|線分と線分の交点|AOJ1183|
 |```vector<PT> intersec_circle_circle(CIR a, CIR b)```|円と円の交点|AOJ1183|
+|```bool has_intersec_seg_seg(SG a, SG b)```|線分と線分の交差判定。平行だった場合は無条件にfalseが帰る|AOJ2402|
+|```double dist_pts_seg(PT p, SG a)```|点と線分の距離|AOJ2402|
+|```double dist_seg_seg(SG a, SG b)```|線分と線分の距離|AOJ2402|
 
 
 ## クエリ処理系データ構造
