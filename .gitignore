@@ -5,3 +5,4 @@ test
 comm_tan_test.cpp
 intersec_test.cpp
 segment_tree.o
+*.o
