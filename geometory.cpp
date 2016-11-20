@@ -4,6 +4,8 @@
 #include <utility>
 #include <vector>
 #include <cassert>
+#include <algorithm>
+#include <cfloat>
 using namespace std;
 
 #define X real()
@@ -152,6 +154,39 @@ vector<PT> intersec_circle_circle(CIR a, CIR b) {
 		res.push_back(a.fi + polar(a.se, theta + arg(b.fi-a.fi)));
 		theta *= -1;
 	}
+	return res;
+}
+
+// 平行だった場合は無条件にfalseが返る
+bool has_intersec_seg_seg(SG a, SG b) {
+	VC va, vb, vc;
+	bool res = true;
+	for(int i = 0; i < 2; i++) {
+		va = b.fi-a.fi; vb = b.se-a.fi; vc = a.se-a.fi;
+		res = res && cross_prod(va, vc) * cross_prod(vb, vc) < EPS;
+		swap(a,b);
+	}
+	res = res && abs(cross_prod(a.fi-a.se, b.fi-b.se)) > EPS;
+	return res;
+}
+
+double dist_pts_seg(PT p, SG a) {
+	double res;
+	res = min(abs(a.fi-p), abs(a.se-p));
+	if(dot_prod(a.se - a.fi, p - a.fi) > -EPS
+			&& dot_prod(a.fi - a.se, p - a.se) > -EPS)
+		res = min(res, dist_pts_line(p, a));
+	return res;
+}
+
+double dist_seg_seg(SG a, SG b) {
+	double res = DBL_MAX;
+	for(int i = 0; i < 2; i++) {
+		res = min(res, min(dist_pts_seg(a.fi,b), dist_pts_seg(a.se,b)));
+		swap(a,b);
+	}
+	if(has_intersec_seg_seg(a,b))
+		res = 0;
 	return res;
 }
 
