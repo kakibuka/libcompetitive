@@ -43,6 +43,7 @@
 |:--:|:--:|:--:|
 |```UpdateDelayedRMQ```|更新遅延付きセグ木によるRMQ実装|CF52C|
 |```UnionFind```|ふつうのUF|AOJ2224|
+|```compressedBinaryTree```|部分的に作るセグ木のテンプレ|DDCC2016qualD|
 
 ### データ構造使用法
 #### ```UpdateDelayedRMQ```
@@ -62,3 +63,12 @@
 |```int find(int a)```|根を見つける。|
 |```bool same(int a, int b)```|同じ集合に含まれるかどうか。|
 |```void merge(int a, int b)```|aが含まれる集合とbが含まれる集合のマージ。|
+
+####```compressedBinaryTree```
+|メンバ関数|内容|
+|:--:|:--:|
+|```compressedBinaryTree(pll range_, compressedBinaryTree* par_)```|範囲rangeに対応するセグメント木のノードを作るコンストラクタ。par_が親ノードのポインタ。根の生成にはpar_にNULLを指定する|
+|```~compressedBinaryTree()```|デストラクタ。芋づる式に子の領域を解放する。|
+|```void searchQuery(ll n)```|要素nに対応するデータを取ってくる。これ範囲にすべきだよね。。。|
+|```void insertQuery(ll n)```|要素nにるデータを挿入する|
+
