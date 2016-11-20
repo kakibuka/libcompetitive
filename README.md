@@ -39,6 +39,7 @@
 |データ構造|内容|verify|
 |:--:|:--:|:--:|
 |```UpdateDelayedRMQ```|更新遅延付きセグ木によるRMQ実装|CF52C|
+|```compressedBinaryTree```|部分的に作るセグ木のテンプレ|DDCC2016qualD|
 
 ### データ構造使用法
 #### ```UpdateDelayedRMQ```
@@ -49,4 +50,12 @@
 |```T inner_query(int a, int b, int k, int l, int r, bool update, T info)```|半開区間[a,b)の最小値を返す。 k,l,rにはノード番号kが[l,r)の区間の情報を持つような値を引数として与える。 アップデートクエリではupdate=true,info=(加算する値)を設定し、 最小値クエリではupdate=false,info=0を設定する。|
 |```T query(int a, int b)```|半開区間[a,b)の最小値クエリ。 inner_queryを適切な形で呼び出す|
 |```T update(int a, int b, T v)```|半開区間[a,b)への加算クエリ。 inner_queryを適切な形で呼び出す|
+
+####```compressedBinaryTree```
+|メンバ関数|内容|
+|:--:|:--:|
+|```compressedBinaryTree(pll range_, compressedBinaryTree* par_)```|範囲rangeに対応するセグメント木のノードを作るコンストラクタ。par_が親ノードのポインタ。根の生成にはpar_にNULLを指定する|
+|```~compressedBinaryTree()```|デストラクタ。芋づる式に子の領域を解放する。|
+|```void searchQuery(ll n)```|要素nに対応するデータを取ってくる。これ範囲にすべきだよね。。。|
+|```void insertQuery(ll n)```|要素nにるデータを挿入する|
 
